@@ -1,3 +1,4 @@
+//global variables
 //function for starting the quiz
 //function for the next question
 //function for checking answer against the api
