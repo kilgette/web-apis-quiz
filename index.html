@@ -5,20 +5,23 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Web APIs Muppets Quiz</title>
+  <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
 </head>
 
 <body>
 <header>
-  <button id = "placeholder">Placeholder</button>
+  <button id="start-button">Start the Quiz</button>
 <main>
-  <h1 id="instructions">Answer as many questions about the Muppets as possible within the time limit. 
+  <h2 id="instructions">Answer as many questions about the Muppets as possible within the time limit. 
     Incorrect answers will remove 10 seconds from the timer.
-  </h1>
+  </h2>
+  <div id="quiz-content" class="quiz-content">
+    <h2 id="quiz-question" class="quiz-question">Here goes your question</h2>
+    <ul id="quiz-choices" class="quiz-choices">
+
+    </ul>
+  </div>
 </main>
- 
-
-
-
-
+ <script src="./assets/js/script.js"></script>
 </body>
 </html>
