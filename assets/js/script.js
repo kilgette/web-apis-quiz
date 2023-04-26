@@ -10,14 +10,29 @@ var currQuestion = 0;
 //array of objects detailing questions, options and answers
 const questionArray = [
   {
-    question: "What is Gonzo's favorite animal:",
-    options: ["goldfish", "cows", "cats", "chickens"],
-    answer: "chickens"
+    question: "What is Gonzo's favorite animal?",
+    options: ["goldfish", "cow", "cat", "chicken"],
+    answer: "chicken"
   },
   {
-    question: "What is the next day after Tuesday?",
-    options: ["Monday", "Wednesday", "cats", "chickens"],
-    answer: "Wednesday"
+    question: "What instrument does Animal play?",
+    options: ["drums", "trombone", "guitar", "piano"],
+    answer: "drums"
+  }, 
+  {
+    question: "In The Great Muppet Caper, Kermit and Fozzie Bear have what relationship?",
+    options: ["twins", "rival thieves", "law-enforcement partners", "father and son"],
+    answer: "twins"
+  }, 
+  {
+    question: "Balcony hecklers Waldorf and Statler are named for what New York City fixtures?",
+    options: ["parks", "stadiums", "hotels", "streets"],
+    answer: "hotels"
+  }, 
+  {
+    question: "Before starring on The Muppet Show, which Muppet first appeared in commercials for Purina?",
+    options: ["Gonzo", "Big Bird", "Rowlf", "Elmo"],
+    answer: "Rowlf"
   }, 
 ]
 
@@ -73,3 +88,5 @@ function gradeTheUsersChoice(event) {
 // add event listeners
 startBtn.addEventListener('click', startTheQuiz);
 questionChoicesEl.addEventListener('click', gradeTheUsersChoice);
+
+
