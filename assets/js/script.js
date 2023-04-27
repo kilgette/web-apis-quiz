@@ -1,4 +1,5 @@
-//global variables; we are going to want to declare some global variables, accessible throughout all of our functions
+//global variables
+//use the DOM API to select an HTML element by ID
 var startBtn = document.querySelector('#start-button');
 var questionTitle = document.querySelector('#quiz-question');
 var questionChoicesEl = document.getElementById('quiz-choices');
@@ -38,22 +39,10 @@ const questionArray = [
 
 // console.log(questionArray[1].options);
 
-//function for starting the quiz
-
 //function for starting the timer
 function timer(){
   var countdown = setInterval
 }
-
-//function to display the next question 
-
-//function for checking answer against the array 
-
-//function runs if correct answer
-
-//function runs if incorrect answer
-
-
 //display score 
 
 function startTheQuiz() {
@@ -85,7 +74,7 @@ function gradeTheUsersChoice(event) {
 
 }
 
-// add event listeners
+// event listeners
 startBtn.addEventListener('click', startTheQuiz);
 questionChoicesEl.addEventListener('click', gradeTheUsersChoice);
 
