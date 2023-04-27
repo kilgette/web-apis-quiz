@@ -1,9 +1,13 @@
 //global variables
 //use the DOM API to select an HTML element by ID
 var startBtn = document.querySelector('#start-button');
-var questionTitle = document.querySelector('#quiz-question');
-var questionChoicesEl = document.getElementById('quiz-choices');
-console.log(questionTitle, questionChoicesEl);
+var questionsDisplay = document.querySelector('#questionsDisplay');
+var questionsQuestions = document.querySelector('#questionsQuestion');
+var questionsButtons = document.querySelector('#questionsButtons');
+var quizStart = document.querySelector('#quizStart');
+// var questionTitle = document.querySelector('#quiz-question');
+// var questionChoicesEl = document.getElementById('quiz-choices');
+// console.log(questionTitle, questionChoicesEl);
 // declare a variable in the global scope which will keep track of the current question
 // you are on. You need this to proceed to the next question when it's time
 var currQuestion = 0;
@@ -44,22 +48,38 @@ function timer(){
   var countdown = setInterval
 }
 //display score 
+function displayScore() {
+
+}
 
 function startTheQuiz() {
+  quizStart.style.display="none"
+  questionsDisplay.style.display="block"
+  displayQuestion()
+
+  //start timer function 
   //console.log('quiz has started')
   //console.log(questionTitle.textContent);
 
 }
+function handleOptionClick() {
+  currQuestion++
+  displayQuestion ()
+}
 
-function showNextQuestion() {
-  questionTitle.textContent = questionArray[currQuestion].question;
+function displayQuestion() {
+  var currentQuestionObject = questionArray[currQuestion];
+  console.log(currentQuestionObject)
+
+  questionsQuestions.textContent = currentQuestionObject.question;
+  questionsButtons.innerHTML=""
   // let's use a for loop to do something repetitively
-  for(var i = 0; i < 4; i = i + 1){
+  for(var i = 0; i < currentQuestionObject.options.length; i = i + 1){
     console.log('i is', i);
     var li = document.createElement('li');
-    // to do: add an event
-    li.textContent = questionArray[currQuestion].options[i];
-    questionChoicesEl.append(li);
+       li.textContent = questionArray[currQuestion].options[i];
+       li.addEventListener("click" , handleOptionClick); 
+    questionsButtons.append(li);
   }
 }
 
@@ -73,6 +93,7 @@ function gradeTheUsersChoice(event) {
 
 
 }
+// showNextQuestion ()
 
 // event listeners
 startBtn.addEventListener('click', startTheQuiz);
