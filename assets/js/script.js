@@ -5,11 +5,7 @@ var questionsDisplay = document.querySelector('#questionsDisplay');
 var questionsQuestions = document.querySelector('#questionsQuestion');
 var questionsButtons = document.querySelector('#questionsButtons');
 var quizStart = document.querySelector('#quizStart');
-// var questionTitle = document.querySelector('#quiz-question');
-// var questionChoicesEl = document.getElementById('quiz-choices');
-// console.log(questionTitle, questionChoicesEl);
-// declare a variable in the global scope which will keep track of the current question
-// you are on. You need this to proceed to the next question when it's time
+//current question
 var currQuestion = 0;
 
 //array of objects detailing questions, options and answers
@@ -41,8 +37,6 @@ const questionArray = [
   }, 
 ]
 
-// console.log(questionArray[1].options);
-
 //function for starting the timer
 function timer(){
   var countdown = setInterval
@@ -57,10 +51,6 @@ function startTheQuiz() {
   questionsDisplay.style.display="block"
   displayQuestion()
 
-  //start timer function 
-  //console.log('quiz has started')
-  //console.log(questionTitle.textContent);
-
 }
 function handleOptionClick() {
   currQuestion++
@@ -73,6 +63,7 @@ function displayQuestion() {
 
   questionsQuestions.textContent = currentQuestionObject.question;
   questionsButtons.innerHTML=""
+  
   // let's use a for loop to do something repetitively
   for(var i = 0; i < currentQuestionObject.options.length; i = i + 1){
     console.log('i is', i);
@@ -86,14 +77,12 @@ function displayQuestion() {
 function gradeTheUsersChoice(event) {
   console.log('event.target is', event.target);
   if(event.target.matches('li')) {
-    // now that you dtermined a li was clicked, go ahead and grade the user's selection
+    // grade user's selection once li is clicked 
     console.log('target\'s textContent is', event.target.textContent);
   }
   // now I can compare the li's text to the current question's "answer" property
-
-
 }
-// showNextQuestion ()
+
 
 // event listeners
 startBtn.addEventListener('click', startTheQuiz);
