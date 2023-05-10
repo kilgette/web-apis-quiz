@@ -2,10 +2,11 @@
 //use the DOM API to select an HTML element by ID
 var startBtn = document.querySelector('#start-button');
 var questionsDisplay = document.querySelector('#questionsDisplay');
-var questionsQuestions = document.querySelector('#questionsQuestion');
+var questionsQuestion = document.querySelector('#questionsQuestion');
 var questionsButtons = document.querySelector('#questionsButtons');
+var questionsChoicesEl = document.querySelector('#questionsButtons');
 var quizStart = document.querySelector('#quizStart');
-
+var score = 0; // variable to store the score
 
 //current question
 var currQuestion = 0;
@@ -41,7 +42,7 @@ const questionArray = [
 
 function startTimer() {
   var secondsLeft = 60; // set the initial number of seconds to count down from
-  var countdown = setInterval(function() {
+  var countdown = setInterval(function () {
     secondsLeft--; // decrement the secondsLeft variable
     if (secondsLeft <= 0) {
       clearInterval(countdown); // clear the interval once the timer reaches 0
@@ -56,10 +57,10 @@ function startTimer() {
 //display score 
 function displayScore() {
   questionsDisplay.style.display = "none";
-  var scoreDisplay = document.createElement("div");
-  var score = (currQuestion / questionArray.length) * 100; // calculate the score
-  scoreDisplay.textContent = "Your score is: " + score + "%";
-  quizStart.appendChild(scoreDisplay);
+  var displayScore = document.createElement("div");
+  score = Math.round((score / questionArray.length) * 100); // calculate the final score
+  displayScore.textContent = "Your score is: " + score + "%";
+  quizStart.appendChild(displayScore);
 }
 
 
@@ -67,44 +68,17 @@ function startTheQuiz() {
   quizStart.style.display = "none"
   questionsDisplay.style.display = "block"
   startTimer()
-  displayQuestion()
+  displayQuestion();
 }
+
 
 function handleOptionClick() {
-  currQuestion++
-  displayQuestion()
-}
-
-function displayQuestion() {
   var currentQuestionObject = questionArray[currQuestion];
-  console.log(currentQuestionObject)
-
-  questionsQuestions.textContent = currentQuestionObject.question;
-  questionsButtons.innerHTML = ""
-
-  // let's use a for loop to do something repetitively
-  for (var i = 0; i < currentQuestionObject.options.length; i = i + 1) {
-    console.log('i is', i);
-    var button = document.createElement('button'); // create a button element
-    button.textContent = questionArray[currQuestion].options[i];
-    button.classList.add('option-button'); // add a CSS class to the button element
-    button.addEventListener("click", handleOptionClick);
-    questionsButtons.append(button); // append the button element to the parent element
+  if (this.textContent === currentQuestionObject.answer) { // check if the user's choice is correct
+    score++; // increment the score for each correct answer
+  } else { 
+    var secondsLeft = parseInt(document.querySelector('#timerDisplay').textContent.split(" ")[2]);
+    secondsLeft -= 10;
+    document.querySelector('#timerDisplay').textContent = "Time left: " + secondsLeft;
   }
 }
-
-function gradeTheUsersChoice(event) {
-  console.log('event.target is', event.target);
-  if (event.target.matches('li')) {
-    
-    // grade user's selection once li is clicked 
-    console.log('target\'s textContent is', event.target.textContent);
-  }
-}
-
-// event listeners
-startBtn.addEventListener('click', startTheQuiz);
-questionChoicesEl.addEventListener('click', gradeTheUsersChoice);
-questionsButtons.addEventListener('click', gradeTheUsersChoice);
-
-
