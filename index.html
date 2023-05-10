@@ -14,7 +14,7 @@
 
     <main id=quizStart>
       <button id="start-button">Start the Quiz</button>
-      <h2 id="instructions">Answer as many questions about The Muppets as possible within the time limit.
+            <h2 id="instructions">Answer as many questions about The Muppets as possible within the time limit.
         <br>Incorrect answers will remove 10 seconds from the timer.
       </h2>
       <!-- <div id="quiz-content" class="quiz-content">
@@ -25,6 +25,7 @@
   </div> -->
     </main>
     <div id="questionsDisplay" style="display:none">
+      <div id = "timerDisplay"></div>
       <h3 id="questionsQuestion"></h3>
       <ul id="questionsButtons"></ul>
       <script src="./assets/js/script.js"></script>
@@ -34,14 +35,3 @@
 
 
 
-<!-- GIVEN I am taking a code quiz
-WHEN I click the start button
-THEN a timer starts and I am presented with a question
-WHEN I answer a question
-THEN I am presented with another question
-WHEN I answer a question incorrectly
-THEN time is subtracted from the clock
-WHEN all questions are answered or the timer reaches 0
-THEN the game is over
-WHEN the game is over
-THEN I can save my initials and my score -->

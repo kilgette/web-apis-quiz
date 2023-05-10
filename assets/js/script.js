@@ -5,6 +5,8 @@ var questionsDisplay = document.querySelector('#questionsDisplay');
 var questionsQuestions = document.querySelector('#questionsQuestion');
 var questionsButtons = document.querySelector('#questionsButtons');
 var quizStart = document.querySelector('#quizStart');
+
+
 //current question
 var currQuestion = 0;
 
@@ -37,22 +39,37 @@ const questionArray = [
   },
 ]
 
-//function for starting the timer
-function timer() {
-  var countdown = setInterval
+function startTimer() {
+  var secondsLeft = 60; // set the initial number of seconds to count down from
+  var countdown = setInterval(function() {
+    secondsLeft--; // decrement the secondsLeft variable
+    if (secondsLeft <= 0) {
+      clearInterval(countdown); // clear the interval once the timer reaches 0
+      displayScore(); // display the final score once the timer reaches 0
+    } else {
+      // display the remaining seconds in the HTML
+      document.querySelector('#timerDisplay').textContent = "Time left: " + secondsLeft + " seconds";
+    }
+  }, 1000); // run the interval every second
 }
 
 //display score 
 function displayScore() {
-
+  questionsDisplay.style.display = "none";
+  var scoreDisplay = document.createElement("div");
+  var score = (currQuestion / questionArray.length) * 100; // calculate the score
+  scoreDisplay.textContent = "Your score is: " + score + "%";
+  quizStart.appendChild(scoreDisplay);
 }
+
 
 function startTheQuiz() {
   quizStart.style.display = "none"
   questionsDisplay.style.display = "block"
+  startTimer()
   displayQuestion()
-
 }
+
 function handleOptionClick() {
   currQuestion++
   displayQuestion()
@@ -68,10 +85,11 @@ function displayQuestion() {
   // let's use a for loop to do something repetitively
   for (var i = 0; i < currentQuestionObject.options.length; i = i + 1) {
     console.log('i is', i);
-    var li = document.createElement('li');
-    li.textContent = questionArray[currQuestion].options[i];
-    li.addEventListener("click", handleOptionClick);
-    questionsButtons.append(li);
+    var button = document.createElement('button'); // create a button element
+    button.textContent = questionArray[currQuestion].options[i];
+    button.classList.add('option-button'); // add a CSS class to the button element
+    button.addEventListener("click", handleOptionClick);
+    questionsButtons.append(button); // append the button element to the parent element
   }
 }
 
@@ -83,7 +101,6 @@ function gradeTheUsersChoice(event) {
     console.log('target\'s textContent is', event.target.textContent);
   }
 }
-
 
 // event listeners
 startBtn.addEventListener('click', startTheQuiz);
