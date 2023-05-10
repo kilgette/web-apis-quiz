@@ -4,7 +4,7 @@ var startBtn = document.querySelector('#start-button');
 var questionsDisplay = document.querySelector('#questionsDisplay');
 var questionsQuestion = document.querySelector('#questionsQuestion');
 var questionsButtons = document.querySelector('#questionsButtons');
-var questionsChoicesEl = document.querySelector('#questionsButtons');
+var questionOptionsEl = document.querySelector('#questionOptions');
 var quizStart = document.querySelector('#quizStart');
 var score = 0; // variable to store the score
 
@@ -67,18 +67,36 @@ function displayScore() {
 function startTheQuiz() {
   quizStart.style.display = "none"
   questionsDisplay.style.display = "block"
-  startTimer()
   displayQuestion();
+  startTimer();
 }
 
 
 function handleOptionClick() {
   var currentQuestionObject = questionArray[currQuestion];
-  if (this.textContent === currentQuestionObject.answer) { // check if the user's choice is correct
-    score++; // increment the score for each correct answer
-  } else { 
-    var secondsLeft = parseInt(document.querySelector('#timerDisplay').textContent.split(" ")[2]);
+  if (this.textContent === currentQuestionObject.answer) {
+    score++;
+  } else {
+    var secondsLeft = parseInt(document.querySelector('#timer').textContent.split(" ")[2]);
     secondsLeft -= 10;
-    document.querySelector('#timerDisplay').textContent = "Time left: " + secondsLeft;
+    document.querySelector('#timer').textContent = "Time left: " + secondsLeft + " seconds";
+  }
+  currQuestion++;
+  if (currQuestion < questionArray.length) {
+    displayQuestion();
+  } else {
+    displayScore();
+  }
+}
+function displayQuestion() {
+  var currentQuestionObject = questionArray[currQuestion];
+  questionsQuestion.textContent = currentQuestionObject.question;
+  questionOptionsEl.innerHTML = ""; // Clear the options
+  for (var i = 0; i < currentQuestionObject.options.length; i++) {
+    var option = document.createElement("li");
+    option.className = "option-button";
+    option.textContent = currentQuestionObject.options[i];
+    option.addEventListener("click", handleOptionClick);
+    questionOptionsEl.appendChild(option);
   }
 }
