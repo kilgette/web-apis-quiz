@@ -1,10 +1,10 @@
 //global variables
-//use the DOM API to select an HTML element by ID
 var startBtn = document.querySelector('#start-button');
 var questionsDisplay = document.querySelector('#questionsDisplay');
 var questionsQuestions = document.querySelector('#questionsQuestion');
 var questionsButtons = document.querySelector('#questionsButtons');
 var quizStart = document.querySelector('#quizStart');
+
 //current question
 var currQuestion = 0;
 
@@ -42,7 +42,7 @@ function timer(){
   var time = 60; // set the total time in seconds
   var countdown = setInterval(function() {
     if (time <= 0) {
-      clearInterval(countdown); // stop the countdown when the time runs out
+      clearInterval(countdown); // stop the count when time runs out 
       displayScore(); // display the final score
     } else {
       time--; // decrement the time
@@ -53,12 +53,6 @@ function timer(){
   }, 1000); // set the interval to 1 second
 }
   
-
-
-//display score 
-function displayScore() {
-
-}
 
 function startTheQuiz() {
   quizStart.style.display="none"
@@ -92,8 +86,7 @@ function displayQuestion() {
 
   questionsQuestions.textContent = currentQuestionObject.question;
   questionsButtons.innerHTML=""
-  
-  // let's use a for loop to do something repetitively
+
   for(var i = 0; i < currentQuestionObject.options.length; i = i + 1){
     console.log('i is', i);
     var button = document.createElement('button');
@@ -106,11 +99,11 @@ function displayQuestion() {
 function gradeTheUsersChoice(event) {
   console.log('event.target is', event.target);
   if(event.target.matches('button')) {
+
     // grade user's selection once li is clicked 
     console.log('target\'s textContent is', event.target.textContent);
   }
-  // now I can compare the li's text to the current question's "answer" property
-}
+ }
 
 
 // event listeners
