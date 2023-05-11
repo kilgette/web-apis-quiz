@@ -39,8 +39,22 @@ const questionArray = [
 
 //function for starting the timer
 function timer(){
-  var countdown = setInterval
+  var time = 60; // set the total time in seconds
+  var countdown = setInterval(function() {
+    if (time <= 0) {
+      clearInterval(countdown); // stop the countdown when the time runs out
+      displayScore(); // display the final score
+    } else {
+      time--; // decrement the time
+      // update the timer display
+      var timerDisplay = document.querySelector('#timer');
+      timerDisplay.textContent = 'Time remaining: ' + time + ' seconds';
+    }
+  }, 1000); // set the interval to 1 second
 }
+  
+
+
 //display score 
 function displayScore() {
 
@@ -49,12 +63,27 @@ function displayScore() {
 function startTheQuiz() {
   quizStart.style.display="none"
   questionsDisplay.style.display="block"
-  displayQuestion()
+  timer();
+  displayQuestion();
 
 }
-function handleOptionClick() {
-  currQuestion++
-  displayQuestion ()
+function handleOptionClick(event) {
+  var selectedAnswer = event.target.textContent;
+  var currentQuestionObject = questionArray[currQuestion];
+  if (selectedAnswer === currentQuestionObject.answer) {
+    // handle correct answer
+  } else {
+    // handle incorrect answer
+    var timerDisplay = document.querySelector('#timer');
+    var remainingTime = parseInt(timerDisplay.textContent.match(/\d+/)[0]);
+    remainingTime -= 10; // deduct 10 seconds
+    if (remainingTime < 0) {
+      remainingTime = 0; // prevent negative time
+    }
+    timerDisplay.textContent = 'Time remaining: ' + remainingTime + ' seconds';
+  }
+  currQuestion++;
+  displayQuestion();
 }
 
 function displayQuestion() {
@@ -67,16 +96,16 @@ function displayQuestion() {
   // let's use a for loop to do something repetitively
   for(var i = 0; i < currentQuestionObject.options.length; i = i + 1){
     console.log('i is', i);
-    var li = document.createElement('li');
-       li.textContent = questionArray[currQuestion].options[i];
-       li.addEventListener("click" , handleOptionClick); 
-    questionsButtons.append(li);
+    var button = document.createElement('button');
+       button.textContent = questionArray[currQuestion].options[i];
+       button.addEventListener("click" , handleOptionClick); 
+    questionsButtons.append(button);
   }
 }
 
 function gradeTheUsersChoice(event) {
   console.log('event.target is', event.target);
-  if(event.target.matches('li')) {
+  if(event.target.matches('button')) {
     // grade user's selection once li is clicked 
     console.log('target\'s textContent is', event.target.textContent);
   }
